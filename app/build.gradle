@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt' //追加
+    id 'dagger.hilt.android.plugin' // Dagger Hilt　追加
+    id 'androidx.navigation.safeargs.kotlin' //safe args　追加
+    id 'kotlin-parcelize' // Parcelize　追加
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.yamato.myflashcard_for_sqlite"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //ナビゲーションライブラリ
+    var nav_version = "2.3.5"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    //ルームライブラリ
+    var room_version = "2.3.0"
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // Dagger Hiltライブラリ
+    implementation("com.google.dagger:hilt-android:$rootProject.hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$rootProject.hilt_version")
+
+    // RecyclerViewライブラリ
+    implementation "androidx.recyclerview:recyclerview:1.2.0-beta01"
+
+    // LiveDataライブラリ
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
+
+
+}
