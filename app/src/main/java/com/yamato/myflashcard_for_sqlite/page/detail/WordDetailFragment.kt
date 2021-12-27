@@ -23,5 +23,6 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment) {
         // リストのアイテムから受け取った単語の表示
         val words = args.words
         binding.textViewWordWordDetail.text = words.word
+        binding.textViewCommentaryWordDetail.text = words.commentary
     }
 }
