@@ -26,6 +26,10 @@ class MainFragment:Fragment(R.layout.main_fragment) {
         binding.buttonListMain.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_wordListFragment)
         }
+
+        binding.buttonLessonMain.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_wordLessonFragment)
+        }
     }
 
     override fun onDestroyView() {

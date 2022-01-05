@@ -23,4 +23,20 @@ class WordRepositoryImpl @Inject constructor(
             dao.create(words)
         }
     }
+
+    override suspend fun updateJudgement(word:Word,right: Int, wrong: Int): Word {
+        val updatedWord = Word(
+            id = word.id,
+            word = word.word,
+            commentary = word.commentary,
+            right = word.right + right,
+            wrong = word.wrong + wrong,
+            created = word.created,
+            modified = System.currentTimeMillis()
+        )
+        withContext(Dispatchers.IO) {
+            dao.update(updatedWord)
+        }
+        return updatedWord
+    }
 }

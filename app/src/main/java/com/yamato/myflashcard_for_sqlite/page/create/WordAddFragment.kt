@@ -14,13 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class WordAddFragment:Fragment(R.layout.word_add_fragment) {
     private val vm: WordAddViewModel by viewModels()
-
     private var _binding: WordAddFragmentBinding? = null
     private val binding: WordAddFragmentBinding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

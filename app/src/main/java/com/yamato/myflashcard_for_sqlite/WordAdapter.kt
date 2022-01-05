@@ -38,9 +38,15 @@ class WordAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         // 設定メソッド
         fun bindTo(word: Word) {
-            binding.textViewWordWordList.text = word.word
-            binding.textviewWordNumWordList.text = "No." + word.id.toString()
-            Log.d("WordAdapter",word.word)
+            // 単語ID
+            binding.textviewWordNumWordItem.text = "No." + word.id.toString()
+            // 単語
+            binding.textViewWordWordItem.text = word.word
+            // 正解数
+            binding.textViewRightWordItem.text = word.right.toString()
+            // 誤答数
+            binding.textViewWrongWordItem.text = word.wrong.toString()
+//            Log.d("WordAdapter",word.word)
         }
     }
 

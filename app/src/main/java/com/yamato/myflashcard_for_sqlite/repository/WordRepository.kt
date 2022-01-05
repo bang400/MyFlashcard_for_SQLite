@@ -7,6 +7,8 @@ interface WordRepository {
     // 非同期で処理したいのでsuspendとする
     suspend fun create(word:String,commentary: String)
 
+    suspend fun updateJudgement(word:Word,right: Int, wrong: Int) :Word
+
     //全件取得のメソッド
     fun getAll(): Flow<List<Word>>
 }
