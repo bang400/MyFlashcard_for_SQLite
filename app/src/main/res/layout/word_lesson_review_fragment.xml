@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView_word_lesson_detail"
+        android:id="@+id/textView_word_lesson_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -28,14 +28,14 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button_unknown_lesson_detail"
+            android:id="@+id/button_unknown_lesson_review"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="0.5"
             android:text="わからない" />
 
         <Button
-            android:id="@+id/button_know_lesson_detail"
+            android:id="@+id/button_know_lesson_review"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="0.5"
@@ -43,7 +43,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_commentary_lesson_detail"
+        android:id="@+id/button_commentary_lesson_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -52,10 +52,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_word_lesson_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_word_lesson_review" />
 
     <TextView
-        android:id="@+id/textView_commentary_lesson_detail"
+        android:id="@+id/textView_commentary_lesson_review"
         android:layout_width="323dp"
         android:layout_height="77dp"
         android:layout_marginStart="32dp"
@@ -64,5 +64,5 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_word_lesson_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_word_lesson_review" />
 </androidx.constraintlayout.widget.ConstraintLayout>

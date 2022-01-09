@@ -1,4 +1,4 @@
-package com.yamato.myflashcard_for_sqlite.page.lessonDetail
+package com.yamato.myflashcard_for_sqlite.page.lessonReview
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,9 +11,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WordLessonDetailViewModel @Inject constructor(
-    private val repo :WordRepository
-):ViewModel() {
+class WordLessonReviewViewModel @Inject constructor(
+    private val repo : WordRepository
+): ViewModel() {
     val errorMessage = MutableLiveData<String>()
     val done = MutableLiveData<Word>()
 
@@ -22,7 +22,7 @@ class WordLessonDetailViewModel @Inject constructor(
     // 復習出題用として使用
     val wordReviewList = repo.getReview().asLiveData()
 
-    fun addJudgement(word: Word,right: Int, wrong: Int){
+    fun addJudgement(word: Word, right: Int, wrong: Int){
         viewModelScope.launch {
             try {
                 val updatedWord = repo.updateJudgement(word,right,wrong)

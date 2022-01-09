@@ -19,6 +19,10 @@ class WordRepositoryImpl @Inject constructor(
         return dao.getCount()
     }
 
+    override fun getReview(): Flow<List<Word>> {
+        return dao.getReview()
+    }
+
     override fun getReviewCount(): Flow<Int> {
         return dao.getReviewCount()
     }

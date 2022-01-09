@@ -1,72 +1,67 @@
-package com.yamato.myflashcard_for_sqlite.page.lessonDetail
+package com.yamato.myflashcard_for_sqlite.page.lessonReview
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ListAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.google.android.material.snackbar.Snackbar
 import com.yamato.myflashcard_for_sqlite.R
-import com.yamato.myflashcard_for_sqlite.databinding.WordLessonDetailFragmentBinding
+import com.yamato.myflashcard_for_sqlite.databinding.WordLessonReviewFragmentBinding
 import com.yamato.myflashcard_for_sqlite.model.Word
-import com.yamato.myflashcard_for_sqlite.page.detail.WordDetailFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
-    private val vm: WordLessonDetailViewModel by viewModels()
-    private var _binding: WordLessonDetailFragmentBinding? = null
-    private val binding: WordLessonDetailFragmentBinding get() = _binding!!
+class WordLessonReviewFragment:Fragment(R.layout.word_lesson_review_fragment) {
+    private val vm: WordLessonReviewViewModel by viewModels()
+    private var _binding: WordLessonReviewFragmentBinding? = null
+    private val binding: WordLessonReviewFragmentBinding get() = _binding!!
 
     companion object {
         lateinit var wordList: List<Word>
         lateinit var sortList: ArrayList<Int>
         var countList = 0
         var judge = false
-        var TAG = "WordLessonDetailFragment"
+        var TAG = "WordLessonReviewFragment"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this._binding = WordLessonDetailFragmentBinding.bind(view)
+        this._binding = WordLessonReviewFragmentBinding.bind(view)
 
         countList = 0
         sortList = arrayListOf()
         var firstPerformance = true
 
         // 解説ボタンの表示設定：オン
-        binding.textViewCommentaryLessonDetail.visibility = View.INVISIBLE
+        binding.textViewCommentaryLessonReview.visibility = View.INVISIBLE
 
         // 解説ボタン
-        binding.buttonCommentaryLessonDetail.setOnClickListener{
+        binding.buttonCommentaryLessonReview.setOnClickListener{
             //　解説ボタンを押下したら解説を表示する
-            binding.textViewCommentaryLessonDetail.visibility = View.VISIBLE
+            binding.textViewCommentaryLessonReview.visibility = View.VISIBLE
         }
 
         // わかるボタンを押下したときの処理
-        binding.buttonKnowLessonDetail.setOnClickListener{
+        binding.buttonKnowLessonReview.setOnClickListener{
             judge = true
             addJudgement(judge)
             fetchLesson(wordList,countList,sortList)
             //　解説ボタンを表示する
-            binding.buttonCommentaryLessonDetail.visibility = View.VISIBLE
+            binding.buttonCommentaryLessonReview.visibility = View.VISIBLE
             //　解説を非表示にする
-            binding.textViewCommentaryLessonDetail.visibility = View.INVISIBLE
+            binding.textViewCommentaryLessonReview.visibility = View.INVISIBLE
             countList = countList + 1
         }
         // わからないボタンを押下したときの処理
-        binding.buttonUnknownLessonDetail.setOnClickListener{
+        binding.buttonUnknownLessonReview.setOnClickListener{
             judge = false
             addJudgement(judge)
             fetchLesson(wordList,countList,sortList)
             //　解説ボタンを表示する
-            binding.buttonCommentaryLessonDetail.visibility = View.VISIBLE
+            binding.buttonCommentaryLessonReview.visibility = View.VISIBLE
             //　解説を非表示にする
-            binding.textViewCommentaryLessonDetail.visibility = View.INVISIBLE
+            binding.textViewCommentaryLessonReview.visibility = View.INVISIBLE
             countList = countList + 1
         }
 
@@ -90,24 +85,24 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
     }
 
     // ランダム出力時の問題表示
-    private fun fetchLesson(wordList: List<Word>,countList: Int,sortList: ArrayList<Int>) {
+    private fun fetchLesson(wordList: List<Word>, countList: Int, sortList: ArrayList<Int>) {
         if (countList < wordList.size) {
 //            Log.d(TAG,"wordList " + wordList)
 //            Log.d(TAG,"wordList 1件 " + wordList[0])
 //            Log.d(TAG,"filter 1件 " + wordList.filter { id == sortList[countList]})
-             Log.d(TAG,"countList " + Companion.countList)
+            Log.d(TAG,"countList " + Companion.countList)
             for (list in wordList){
                 if (list.id == sortList[countList]) {
                     //　ランダムの並び順と一致しているデータを返す
                     // 単語の表示
-                    binding.textViewWordLessonDetail.text = list.word
+                    binding.textViewWordLessonReview.text = list.word
                     // 解説の表示
-                    binding.textViewCommentaryLessonDetail.text = list.commentary
+                    binding.textViewCommentaryLessonReview.text = list.commentary
                 }
             }
         }else{
             // 問題終了
-            Toast.makeText(context,"問題終了",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"問題終了", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -136,4 +131,5 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
         super.onDestroyView()
         this._binding = null
     }
+
 }

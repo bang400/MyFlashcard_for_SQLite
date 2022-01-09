@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yamato.myflashcard_for_sqlite.R
 import com.yamato.myflashcard_for_sqlite.databinding.WordLessonFragmentBinding
+import com.yamato.myflashcard_for_sqlite.page.list.WordListFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +20,7 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordLessonFragmentBinding.bind(view)
+        var questions = 0
 
         vm.wordCount.observe(viewLifecycleOwner) { it ->
             // 総項目数
@@ -38,6 +40,7 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
 
         binding.buttonReviewWordLesson.setOnClickListener {
             // 復習
+
         }
     }
 

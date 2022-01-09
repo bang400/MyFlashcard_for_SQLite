@@ -15,6 +15,11 @@ interface WordRepository {
     // 全件のレコード数を取得
     fun getCount(): Flow<Int>
 
+    // 復習対象のメソッド
+    fun getReview(): Flow<List<Word>>
+
     // 復習対象のレコードの行数を取得する
     fun getReviewCount(): Flow<Int>
+
+
 }

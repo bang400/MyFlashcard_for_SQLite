@@ -19,6 +19,10 @@ interface WordDAO {
     @Query("select count(*) from Word")
     fun getCount(): Flow<Int>
 
+    // 復習対象のレコードを取得する
+    @Query("select * from Word where wrong > 0 and 'right' < 1")
+    fun getReview(): Flow<List<Word>>
+
     // 復習対象のレコードの行数を取得する
     @Query("select count(*) from Word where wrong > 0")
     fun getReviewCount(): Flow<Int>
