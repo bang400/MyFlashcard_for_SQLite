@@ -15,6 +15,14 @@ class WordRepositoryImpl @Inject constructor(
         return dao.getAll()
     }
 
+    override fun getCount(): Flow<Int> {
+        return dao.getCount()
+    }
+
+    override fun getReviewCount(): Flow<Int> {
+        return dao.getReviewCount()
+    }
+
     override suspend fun create(word: String, commentary: String) {
         // サーバに書き換えしたかったらこのメソッドを変更するだけで良し
         val nowTime = System.currentTimeMillis()
