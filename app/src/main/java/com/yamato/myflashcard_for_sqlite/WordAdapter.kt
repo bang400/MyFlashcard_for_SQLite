@@ -43,7 +43,7 @@ class WordAdapter(
             // 単語
             binding.textViewWordWordItem.text = word.word
             // 正解数
-            binding.textViewRightWordItem.text = word.right.toString()
+            binding.textViewCorrectWordItem.text = word.correct.toString()
             // 誤答数
             binding.textViewWrongWordItem.text = word.wrong.toString()
 //            Log.d("WordAdapter",word.word)
@@ -61,7 +61,9 @@ class WordAdapter(
             //同じアイテムの時に表示内容が同じかどうか
             override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
                 return oldItem.word == newItem.word &&
-                        oldItem.created == newItem.created
+                        oldItem.created == newItem.created &&
+                        oldItem.correct == newItem.correct &&
+                        oldItem.wrong == newItem.wrong
             }
         }
     }

@@ -1,8 +1,8 @@
 package com.yamato.myflashcard_for_sqlite.page.list
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.View
+import android.util.Log
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +20,11 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
     private var _binding: WordListFragmentBinding? = null
     private val binding: WordListFragmentBinding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //タイトルバーの設定
@@ -32,12 +37,29 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
             val action = WordListFragmentDirections.actionWordListFragmentToWordDetailFragment(it)
             findNavController().navigate(action)
         }
-        binding.recyclerviewWordList.adapter = adapter
-
         //LiveDataを監視する
         //リポジトリから新しいリストを受け取ったらsubmitListでアダプターに渡す
         vm.wordList.observe(viewLifecycleOwner) { list ->
             adapter.submitList(list)
+            Log.d("TEST","よびました")
+        }
+        binding.recyclerviewWordList.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_detail,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_study_data_delete -> {
+//                findNavController().navigate(
+////                    R.id.
+//                )
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

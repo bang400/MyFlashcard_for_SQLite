@@ -38,36 +38,38 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
         sortList = arrayListOf()
         var firstPerformance = true
 
-        // 解説ボタンの表示設定：オン
+        // 解説の表示設定：初期値 オフ
         binding.textViewCommentaryLessonDetail.visibility = View.INVISIBLE
 
         // 解説ボタン
         binding.buttonCommentaryLessonDetail.setOnClickListener{
             //　解説ボタンを押下したら解説を表示する
             binding.textViewCommentaryLessonDetail.visibility = View.VISIBLE
+            //　解説ボタンを押下したら解説ボタンは非表示にする
+            binding.buttonCommentaryLessonDetail.visibility = View.INVISIBLE
         }
 
         // わかるボタンを押下したときの処理
         binding.buttonKnowLessonDetail.setOnClickListener{
             judge = true
             addJudgement(judge)
+            countList = countList + 1
             fetchLesson(wordList,countList,sortList)
             //　解説ボタンを表示する
             binding.buttonCommentaryLessonDetail.visibility = View.VISIBLE
             //　解説を非表示にする
             binding.textViewCommentaryLessonDetail.visibility = View.INVISIBLE
-            countList = countList + 1
         }
         // わからないボタンを押下したときの処理
         binding.buttonUnknownLessonDetail.setOnClickListener{
             judge = false
             addJudgement(judge)
+            countList = countList + 1
             fetchLesson(wordList,countList,sortList)
             //　解説ボタンを表示する
             binding.buttonCommentaryLessonDetail.visibility = View.VISIBLE
             //　解説を非表示にする
             binding.textViewCommentaryLessonDetail.visibility = View.INVISIBLE
-            countList = countList + 1
         }
 
         vm.wordList.observe(viewLifecycleOwner) { list ->
@@ -108,16 +110,17 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
         }else{
             // 問題終了
             Toast.makeText(context,"問題終了",Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack()
         }
     }
 
     private fun addJudgement(judge:Boolean) {
-        var right = 0
+        var correct = 0
         var wrong = 0
 
         if(judge){
             // わかる
-            right = 1
+            correct = 1
         }else{
             //　わからない
             wrong = 1
@@ -126,7 +129,7 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
             for (list in wordList) {
                 if (list.id == sortList[countList]) {
                     // 正当数を保存する
-                    vm.addJudgement(list, right, wrong)
+                    vm.addJudgement(list, correct, wrong)
                 }
             }
         }

@@ -74,18 +74,18 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
 
     private fun addJudgement(judge:Boolean) {
 
-        var right = 0
+        var correct = 0
         var wrong = 0
 
         if(judge){
             // わかる
-            right = 1
+            correct = 1
         }else{
             //　わからない
             wrong = 1
         }
         // 正当数を保存する
-        vm.addJudgement(args.words,right,wrong)
+        vm.addJudgement(args.words,correct,wrong)
     }
 
     override fun onDestroyView() {

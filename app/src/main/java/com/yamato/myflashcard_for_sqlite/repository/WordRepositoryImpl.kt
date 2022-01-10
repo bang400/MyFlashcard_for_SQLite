@@ -30,18 +30,18 @@ class WordRepositoryImpl @Inject constructor(
     override suspend fun create(word: String, commentary: String) {
         // サーバに書き換えしたかったらこのメソッドを変更するだけで良し
         val nowTime = System.currentTimeMillis()
-        val words = Word(word = word, commentary = commentary,created = nowTime,modified = nowTime,right = 0,wrong = 0)
+        val words = Word(word = word, commentary = commentary,created = nowTime,modified = nowTime,correct = 0,wrong = 0)
         withContext(Dispatchers.IO) {
             dao.create(words)
         }
     }
 
-    override suspend fun updateJudgement(word:Word,right: Int, wrong: Int): Word {
+    override suspend fun updateJudgement(word:Word,correct: Int, wrong: Int): Word {
         val updatedWord = Word(
             id = word.id,
             word = word.word,
             commentary = word.commentary,
-            right = word.right + right,
+            correct = word.correct + correct,
             wrong = word.wrong + wrong,
             created = word.created,
             modified = System.currentTimeMillis()

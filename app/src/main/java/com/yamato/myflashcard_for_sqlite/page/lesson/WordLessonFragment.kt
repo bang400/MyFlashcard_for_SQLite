@@ -2,6 +2,7 @@ package com.yamato.myflashcard_for_sqlite.page.lesson
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,7 +21,8 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordLessonFragmentBinding.bind(view)
-        var questions = 0
+
+        var reviewCount = 0
 
         vm.wordCount.observe(viewLifecycleOwner) { it ->
             // 総項目数
@@ -30,6 +32,7 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
         // 復習数
         vm.wordReviewCount.observe(viewLifecycleOwner) {it ->
             binding.textViewReviewValueWordLesson.text = it.toString()
+            reviewCount = it
         }
 
         binding.buttonRandomWordLesson.setOnClickListener {
@@ -40,7 +43,12 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
 
         binding.buttonReviewWordLesson.setOnClickListener {
             // 復習
-
+            if(reviewCount > 0){
+                // 復習数が０でなければ復習画面へ遷移
+                findNavController().navigate(R.id.action_wordLessonFragment_to_wordLessonReviewFragment)
+            }else{
+                Toast.makeText(context,"復習対象の単語はありません",Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

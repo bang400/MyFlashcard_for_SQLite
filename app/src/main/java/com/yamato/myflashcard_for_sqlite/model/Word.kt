@@ -12,7 +12,7 @@ data class Word (
     val id: Int = 0,
     val word: String,
     val commentary: String,
-    val right: Int,
+    val correct: Int,
     val wrong: Int,
     val created: Long,
     val modified: Long

@@ -17,10 +17,10 @@ class WordDetailModel @Inject constructor(
     val errorMessage = MutableLiveData<String>()
     val done = MutableLiveData<Word>()
 
-    fun addJudgement(word: Word,right: Int,wrong: Int){
+    fun addJudgement(word: Word,correct: Int,wrong: Int){
         viewModelScope.launch {
             try {
-                val updatedWord = repo.updateJudgement(word,right,wrong)
+                val updatedWord = repo.updateJudgement(word,correct,wrong)
                 done.value = updatedWord
             } catch (e: Exception) {
                 errorMessage.value = e.toString()

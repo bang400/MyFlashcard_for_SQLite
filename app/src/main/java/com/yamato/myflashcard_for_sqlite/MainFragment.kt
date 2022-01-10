@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yamato.myflashcard_for_sqlite.databinding.MainFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment:Fragment(R.layout.main_fragment) {
 
     private val vm: MainViewModel by viewModels()
@@ -18,13 +20,24 @@ class MainFragment:Fragment(R.layout.main_fragment) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = MainFragmentBinding.bind(view)
 
+        var count = 0
+
+        vm.wordCount.observe(viewLifecycleOwner) { it ->
+            count = it
+        }
+
         binding.buttonAddwordMain.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_wordAddFragment)
 //            Toast.makeText(context, "Move Successfully",Toast.LENGTH_SHORT).show()
         }
 
         binding.buttonListMain.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_wordListFragment)
+            // 単語リストを表示する
+            if (count != 0){
+                findNavController().navigate(R.id.action_mainFragment_to_wordListFragment)
+            }else{
+                Toast.makeText(context,"単語を追加してください",Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.buttonLessonMain.setOnClickListener {
