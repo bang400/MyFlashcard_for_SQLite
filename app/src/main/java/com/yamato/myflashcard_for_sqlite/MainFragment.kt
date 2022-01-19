@@ -3,6 +3,8 @@ package com.yamato.myflashcard_for_sqlite
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,10 @@ class MainFragment:Fragment(R.layout.main_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = MainFragmentBinding.bind(view)
+
+        //隠したい
+//        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
+        (activity as AppCompatActivity).supportActionBar?.title = "ホーム"
 
         var count = 0
 

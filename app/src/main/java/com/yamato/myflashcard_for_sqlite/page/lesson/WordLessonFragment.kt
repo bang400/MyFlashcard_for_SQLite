@@ -3,6 +3,7 @@ package com.yamato.myflashcard_for_sqlite.page.lesson
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,7 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordLessonFragmentBinding.bind(view)
+        (activity as AppCompatActivity).supportActionBar?.title = "レッスンを選択"
 
         var reviewCount = 0
 

@@ -16,8 +16,7 @@
         app:layout_constraintEnd_toStartOf="@+id/textView_correct_word_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.476"
-        app:srcCompat="@android:drawable/btn_star_big_on"
-        tools:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/ic_baseline_panorama_fish_eye_24" />
 
     <TextView
         android:id="@+id/textView_wrong_word_item"
@@ -43,8 +42,7 @@
         app:layout_constraintEnd_toStartOf="@+id/textView_wrong_word_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.476"
-        app:srcCompat="@android:drawable/ic_delete"
-        tools:srcCompat="@android:drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_baseline_close_24" />
 
     <TextView
         android:id="@+id/textview_wordNum_word_item"
@@ -65,7 +63,7 @@
     <TextView
         android:id="@+id/textView_word_word_item"
         android:layout_width="191dp"
-        android:layout_height="17dp"
+        android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"

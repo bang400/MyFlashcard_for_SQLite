@@ -2,6 +2,7 @@ package com.yamato.myflashcard_for_sqlite.page.create
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,8 @@ class WordAddFragment:Fragment(R.layout.word_add_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordAddFragmentBinding.bind(view)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "単語を追加"
 
         vm.errorMessage.observe(viewLifecycleOwner) { msg ->
             if (msg.isEmpty()) return@observe

@@ -27,6 +27,10 @@ class WordRepositoryImpl @Inject constructor(
         return dao.getReviewCount()
     }
 
+    override fun initCorrectNum(): Int {
+        return dao.initCorrectNum()
+    }
+
     override suspend fun create(word: String, commentary: String) {
         // サーバに書き換えしたかったらこのメソッドを変更するだけで良し
         val nowTime = System.currentTimeMillis()
@@ -50,5 +54,21 @@ class WordRepositoryImpl @Inject constructor(
             dao.update(updatedWord)
         }
         return updatedWord
+    }
+
+    override suspend fun updateInitCorrectNum(word: Word): Word {
+        val updateInitWord = Word(
+            id = word.id,
+            word = word.word,
+            commentary = word.commentary,
+            correct = 0,
+            wrong = 0,
+            created = word.created,
+            modified = System.currentTimeMillis()
+        )
+        withContext(Dispatchers.IO){
+            dao.update(updateInitWord)
+        }
+        return updateInitWord
     }
 }
