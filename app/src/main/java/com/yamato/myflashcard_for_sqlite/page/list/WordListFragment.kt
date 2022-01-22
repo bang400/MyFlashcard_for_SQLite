@@ -48,6 +48,8 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
         //タイトルバーの設定
         this._binding = WordListFragmentBinding.bind(view)
 
+        (activity as AppCompatActivity).supportActionBar?.title = "単語リスト"
+
         val adapter = WordAdapter{
             // リストがタップされた時の処理
             val action = WordListFragmentDirections.actionWordListFragmentToWordDetailFragment(it)

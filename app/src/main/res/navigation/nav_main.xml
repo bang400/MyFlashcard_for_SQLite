@@ -66,6 +66,9 @@
         <argument
             android:name="words"
             app:argType="com.yamato.myflashcard_for_sqlite.model.Word" />
+        <action
+            android:id="@+id/action_wordDetailFragment_to_wordConfirmItemDialogFragment"
+            app:destination="@id/wordConfirmItemDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/wordLessonFragment"
@@ -98,4 +101,8 @@
         android:id="@+id/wordConfirmDialogFragment"
         android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmDialogFragment"
         android:label="WordConfirmDialogFragment" />
+    <fragment
+        android:id="@+id/wordConfirmItemDialogFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmItemDialogFragment"
+        android:label="WordConfirmItemDialogFragment" />
 </navigation>

@@ -1,9 +1,15 @@
 package com.yamato.myflashcard_for_sqlite.page.detail
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,6 +26,20 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
     private val binding: WordDetailFragmentBinding get() = _binding!!
 
     private val args: WordDetailFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // タイトルバー設定
+        (activity as AppCompatActivity).supportActionBar?.title = "単語詳細"
+        // メニューを画面に表示させる
+        setHasOptionsMenu(true)
+        setFragmentResultListener("confirm"){_,data ->
+            val which = data.getInt("result")
+            if (which == DialogInterface.BUTTON_POSITIVE){
+
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,6 +69,29 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
         vm.done.observe(viewLifecycleOwner) {
             // リストへ遷移させる
             findNavController().popBackStack()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_item_detail,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_edit -> {
+                // 編集ボタン
+
+                true
+            }
+            R.id.item_delete -> {
+                // 削除ボタン
+                findNavController().navigate(
+                    R.id.action_wordDetailFragment_to_wordConfirmItemDialogFragment
+                )
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
