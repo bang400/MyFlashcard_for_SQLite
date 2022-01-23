@@ -2,4 +2,6 @@
     <string name="app_name">Flashcards for me</string>
     <string name="all_data_delete">すべての単語を削除</string>
     <string name="all_study_data_delete">正当数を初期化</string>
+    <string name="unknown_word">知らない</string>
+    <string name="know_word">知ってる</string>
 </resources>

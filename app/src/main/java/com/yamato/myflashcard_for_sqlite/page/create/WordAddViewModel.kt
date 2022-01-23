@@ -24,6 +24,10 @@ class WordAddViewModel @Inject constructor(
             errorMessage.value = "単語入力欄が空です"
             return
         }
+        if(commentary.trim().isEmpty()){
+            errorMessage.value = "解説入力欄が空です。"
+            return
+        }
         //　リポジトリ経由で実際の保存処理を行う
         //　保存してあるかどうか確認するためにDatabaseInspectorが必要
         // 保存処理は非同期で行われるので、ViewModelScopeの中で実行する
