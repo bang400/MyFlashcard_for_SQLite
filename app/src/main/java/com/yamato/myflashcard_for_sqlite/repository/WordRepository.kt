@@ -13,6 +13,9 @@ interface WordRepository {
     // 正当数を初期化する
     suspend fun updateInitCorrectNum(word: Word) :Word
 
+    // １件分のデータを削除
+    suspend fun delete(word: Word)
+
     //全件取得のメソッド
     fun getAll(): Flow<List<Word>>
 

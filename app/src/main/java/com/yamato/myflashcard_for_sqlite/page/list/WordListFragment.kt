@@ -35,7 +35,7 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
         (activity as AppCompatActivity).supportActionBar?.title = "単語リスト"
         setHasOptionsMenu(true)
         setFragmentResultListener("confirm"){_,data ->
-            val which = data.getInt("result")
+            val which = data.getInt("result",DialogInterface.BUTTON_NEGATIVE)
             if (which == DialogInterface.BUTTON_POSITIVE){
                 vm.initCorrectNumFun()
                 Log.d("WordListFragment","正当数を初期化する")

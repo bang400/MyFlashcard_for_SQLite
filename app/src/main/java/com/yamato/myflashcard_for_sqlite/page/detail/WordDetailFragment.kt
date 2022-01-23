@@ -2,10 +2,12 @@ package com.yamato.myflashcard_for_sqlite.page.detail
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -16,6 +18,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.yamato.myflashcard_for_sqlite.R
 import com.yamato.myflashcard_for_sqlite.databinding.WordDetailFragmentBinding
+import com.yamato.myflashcard_for_sqlite.model.Word
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,11 +36,23 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
         (activity as AppCompatActivity).supportActionBar?.title = "単語詳細"
         // メニューを画面に表示させる
         setHasOptionsMenu(true)
-        setFragmentResultListener("confirm"){_,data ->
-            val which = data.getInt("result")
-            if (which == DialogInterface.BUTTON_POSITIVE){
 
+        setFragmentResultListener("edit") { _,data ->
+            val words = data.getParcelable("word") as? Word ?: return@setFragmentResultListener
+            vm.words.value = words
+        }
+
+        setFragmentResultListener("confirm"){_,data ->
+            // DialogInterface.BUTTON_NEGATIVE ・・・キャンセルボタンが押下された
+            val which = data.getInt("result",DialogInterface.BUTTON_NEGATIVE)
+            if (which == DialogInterface.BUTTON_POSITIVE){
+                vm.delete()
+                Log.d("TEST","削除ダイアログ、OK")
             }
+        }
+
+        if (savedInstanceState == null) {
+            vm.words.value = args.words
         }
     }
 
@@ -70,6 +85,11 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
             // リストへ遷移させる
             findNavController().popBackStack()
         }
+        vm.deleted.observe(viewLifecycleOwner){
+            // 削除が完了したときの処理
+            Toast.makeText(context,"${words.word}を削除しました。",Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack(R.id.wordListFragment,false)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -80,12 +100,16 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_edit -> {
-                // 編集ボタン
-
+                Log.d("TEST","編集ボタンおされた")
+                //　単語１件の編集ボタン
+                val words = vm.words.value ?: return true
+                val action = WordDetailFragmentDirections.actionWordDetailFragmentToWordEditFragment(words)
+                findNavController().navigate(action)
                 true
             }
             R.id.item_delete -> {
-                // 削除ボタン
+                Log.d("TEST","削除ボタンおされた")
+                // 単語１件の削除ボタン
                 findNavController().navigate(
                     R.id.action_wordDetailFragment_to_wordConfirmItemDialogFragment
                 )

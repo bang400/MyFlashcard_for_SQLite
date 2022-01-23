@@ -71,4 +71,8 @@ class WordRepositoryImpl @Inject constructor(
         }
         return updateInitWord
     }
+
+    override suspend fun delete(word: Word) {
+        dao.delete(word)
+    }
 }
