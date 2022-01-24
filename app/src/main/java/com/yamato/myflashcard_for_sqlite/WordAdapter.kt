@@ -30,16 +30,17 @@ class WordAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val word = getItem(position)
-        holder.bindTo(word)
+        holder.bindTo(word,position)
     }
 
     class ViewHolder(
         private val binding: WordItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
         // 設定メソッド
-        fun bindTo(word: Word) {
+        fun bindTo(word: Word,position: Int) {
+            var itemId = position + 1
             // 単語ID
-            binding.textviewWordNumWordItem.text = "No." + word.id.toString()
+            binding.textviewWordNumWordItem.text = "No.$itemId"
             // 単語
             binding.textViewWordWordItem.text = word.word
             // 正解数

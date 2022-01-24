@@ -72,6 +72,22 @@ class WordRepositoryImpl @Inject constructor(
         return updateInitWord
     }
 
+    override suspend fun update(words: Word, word: String, commentary: String): Word {
+        val updatedWords = Word(
+            id = words.id,
+            word = word,
+            commentary = commentary,
+            correct = words.correct,
+            wrong = words.wrong,
+            created = words.created,
+            modified = System.currentTimeMillis()
+        )
+        withContext(Dispatchers.IO) {
+            dao.update(updatedWords)
+        }
+        return updatedWords
+    }
+
     override suspend fun delete(word: Word) {
         dao.delete(word)
     }

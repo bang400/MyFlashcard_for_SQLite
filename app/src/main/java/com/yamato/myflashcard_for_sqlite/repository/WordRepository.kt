@@ -7,14 +7,16 @@ interface WordRepository {
     // 非同期で処理したいのでsuspendとする
     suspend fun create(word:String,commentary: String)
 
+    // １件分のデータを削除
+    suspend fun delete(word: Word)
+
+    suspend fun update(words : Word, word:String,commentary: String) :Word
+
     // 正解不正解の更新
     suspend fun updateJudgement(word:Word,correct: Int, wrong: Int) :Word
 
     // 正当数を初期化する
     suspend fun updateInitCorrectNum(word: Word) :Word
-
-    // １件分のデータを削除
-    suspend fun delete(word: Word)
 
     //全件取得のメソッド
     fun getAll(): Flow<List<Word>>
