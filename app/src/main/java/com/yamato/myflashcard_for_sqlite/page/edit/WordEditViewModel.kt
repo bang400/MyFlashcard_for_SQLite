@@ -14,7 +14,7 @@ class WordEditViewModel @Inject constructor(
     private val repo: WordRepository
 ):ViewModel() {
     val errorMessage = MutableLiveData<String>()
-    val updated = MutableLiveData<Boolean>()
+    val updated = MutableLiveData<Word>()
 
     fun updateitem(words: Word, word: String, commentary: String) {
         if (word.trim().isEmpty()){
@@ -27,8 +27,7 @@ class WordEditViewModel @Inject constructor(
         }
         viewModelScope.launch {
             try {
-                repo.update(words,word,commentary)
-                updated.value = true
+                updated.value = repo.update(words,word,commentary,0,0)
             }catch (e:Exception){
                 errorMessage.value = e.message
             }

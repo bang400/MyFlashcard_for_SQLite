@@ -13,6 +13,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -27,13 +29,10 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
     private val vm:WordDetailModel by viewModels()
     private var _binding: WordDetailFragmentBinding? = null
     private val binding: WordDetailFragmentBinding get() = _binding!!
-
     private val args: WordDetailFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // タイトルバー設定
-        (activity as AppCompatActivity).supportActionBar?.title = "単語詳細"
         // メニューを画面に表示させる
         setHasOptionsMenu(true)
 
@@ -60,13 +59,18 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordDetailFragmentBinding.bind(view)
 
+        // タイトルバー設定
+        (activity as AppCompatActivity).supportActionBar?.title = "単語詳細"
+
         // リストのアイテムから受け取った単語の表示
         val words = args.words
+
         // テキスト：単語
         binding.textViewWordWordDetail.text = words.word
-
         // テキスト：解説
         binding.textViewCommentaryWordDetail.text = words.commentary
+
+
         binding.textViewCommentaryWordDetail.visibility = View.INVISIBLE
 
         // 解説ボタン

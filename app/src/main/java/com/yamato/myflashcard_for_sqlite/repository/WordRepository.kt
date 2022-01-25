@@ -10,7 +10,7 @@ interface WordRepository {
     // １件分のデータを削除
     suspend fun delete(word: Word)
 
-    suspend fun update(words : Word, word:String,commentary: String) :Word
+    suspend fun update(words : Word, word:String,commentary: String,correct: Int,wrong: Int) :Word
 
     // 正解不正解の更新
     suspend fun updateJudgement(word:Word,correct: Int, wrong: Int) :Word

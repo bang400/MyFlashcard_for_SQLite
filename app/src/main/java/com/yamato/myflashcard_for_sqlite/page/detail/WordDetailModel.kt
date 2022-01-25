@@ -1,12 +1,10 @@
 package com.yamato.myflashcard_for_sqlite.page.detail
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.yamato.myflashcard_for_sqlite.model.Word
 import com.yamato.myflashcard_for_sqlite.repository.WordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +29,6 @@ class WordDetailModel @Inject constructor(
             }
         }
     }
-
     fun delete() {
         // 単語１件削除の処理
         viewModelScope.launch {
@@ -44,6 +41,4 @@ class WordDetailModel @Inject constructor(
             }
         }
     }
-
-
 }

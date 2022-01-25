@@ -72,13 +72,13 @@ class WordRepositoryImpl @Inject constructor(
         return updateInitWord
     }
 
-    override suspend fun update(words: Word, word: String, commentary: String): Word {
+    override suspend fun update(words: Word, word: String, commentary: String,correct: Int,wrong: Int): Word {
         val updatedWords = Word(
             id = words.id,
             word = word,
             commentary = commentary,
-            correct = words.correct,
-            wrong = words.wrong,
+            correct = correct,
+            wrong = wrong,
             created = words.created,
             modified = System.currentTimeMillis()
         )
