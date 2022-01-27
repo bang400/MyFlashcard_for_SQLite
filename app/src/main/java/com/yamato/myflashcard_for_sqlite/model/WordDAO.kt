@@ -29,7 +29,11 @@ interface WordDAO {
 
     // 正当数の初期化
     @Query("update Word set wrong = 0 ,correct = 0")
-    fun initCorrectNum(): Int
+    suspend fun initCorrectNum(): Int
+
+    // 全データ削除
+    @Query("delete from Word")
+    suspend fun deleteAll()
 
     @Insert
     suspend fun create(word: Word)

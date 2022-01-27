@@ -18,6 +18,6 @@ class WordConfirmDialogFragment:DialogFragment() {
     }
 
     private val listener = DialogInterface.OnClickListener { _, which ->
-        setFragmentResult("confirm", bundleOf("result" to which))
+        setFragmentResult("confirmCorrectNumCnt", bundleOf("result" to which))
     }
 }

@@ -58,11 +58,13 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpToInclusive="false" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_wordListFragment_to_wordConfirmDialogFragment"
             app:destination="@id/wordConfirmDialogFragment" />
+        <action
+            android:id="@+id/action_wordListFragment_to_wordConfirmDeleteDialogFragment"
+            app:destination="@id/wordConfirmDeleteDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/wordDetailFragment"
@@ -117,7 +119,13 @@
     <dialog
         android:id="@+id/wordConfirmDialogFragment"
         android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmDialogFragment"
-        android:label="WordConfirmDialogFragment" />
+        android:label="WordConfirmDialogFragment" >
+        <action
+            android:id="@+id/action_wordConfirmDialogFragment_to_wordListFragment"
+            app:destination="@id/wordListFragment"
+            app:popUpTo="@id/wordListFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
     <dialog
         android:id="@+id/wordConfirmItemDialogFragment"
         android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmItemDialogFragment"
@@ -136,4 +144,8 @@
             app:popUpTo="@id/wordDetailFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <dialog
+        android:id="@+id/wordConfirmDeleteDialogFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmDeleteDialogFragment"
+        android:label="WordConfirmDeleteDialogFragment" />
 </navigation>

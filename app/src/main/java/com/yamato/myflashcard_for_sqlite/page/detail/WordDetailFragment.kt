@@ -41,7 +41,7 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
             vm.words.value = words
         }
 
-        setFragmentResultListener("confirm"){_,data ->
+        setFragmentResultListener("confirmItemDelete"){_,data ->
             // DialogInterface.BUTTON_NEGATIVE ・・・キャンセルボタンが押下された
             val which = data.getInt("result",DialogInterface.BUTTON_NEGATIVE)
             if (which == DialogInterface.BUTTON_POSITIVE){

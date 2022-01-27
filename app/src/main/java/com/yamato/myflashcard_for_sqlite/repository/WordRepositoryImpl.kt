@@ -27,8 +27,12 @@ class WordRepositoryImpl @Inject constructor(
         return dao.getReviewCount()
     }
 
-    override fun initCorrectNum(): Int {
+    override suspend fun initCorrectNum(): Int{
         return dao.initCorrectNum()
+    }
+
+    override suspend fun deleteAll(){
+        return dao.deleteAll()
     }
 
     override suspend fun create(word: String, commentary: String) {

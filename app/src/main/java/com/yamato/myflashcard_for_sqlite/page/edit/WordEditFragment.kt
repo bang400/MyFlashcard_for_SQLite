@@ -43,12 +43,15 @@ class WordEditFragment:Fragment(R.layout.word_edit_fragment) {
             Snackbar.make(requireView(),msg,Snackbar.LENGTH_SHORT).show()
             vm.errorMessage.value = ""
         }
-        vm.updated.observe(viewLifecycleOwner) { it ->
+        vm.notUpdated.observe(viewLifecycleOwner) {
+            findNavController().popBackStack()
+        }
+
+        vm.updateData.observe(viewLifecycleOwner) { it ->
             //　更新完了後の処理
             Toast.makeText(context,"単語を編集しました、",Toast.LENGTH_SHORT).show()
             val action = WordEditFragmentDirections.actionWordEditFragmentToWordDetailFragment(it)
             findNavController().navigate(action)
-//            findNavController().popBackStack(R.id.wordDetailFragment,false)
         }
     }
 

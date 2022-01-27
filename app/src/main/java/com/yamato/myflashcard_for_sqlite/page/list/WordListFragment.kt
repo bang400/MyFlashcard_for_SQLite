@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -30,24 +31,29 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //隠したい
-//        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.show()
-        (activity as AppCompatActivity).supportActionBar?.title = "単語リスト"
         setHasOptionsMenu(true)
-        setFragmentResultListener("confirm"){_,data ->
-            val which = data.getInt("result",DialogInterface.BUTTON_NEGATIVE)
+
+        // 正当数を初期化する
+        setFragmentResultListener("confirmCorrectNumCnt"){_,data ->
+            val which = data.getInt("result")
             if (which == DialogInterface.BUTTON_POSITIVE){
                 vm.initCorrectNumFun()
                 Log.d("WordListFragment","正当数を初期化する")
+            }
+        }
+        // すべての単語を削除する
+        setFragmentResultListener("confirm"){_,data ->
+            val which = data.getInt("result")
+            if (which == DialogInterface.BUTTON_POSITIVE){
+                vm.deleteAll()
             }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //タイトルバーの設定
         this._binding = WordListFragmentBinding.bind(view)
-
+        //タイトルバーの設定
         (activity as AppCompatActivity).supportActionBar?.title = "単語リスト"
 
         val adapter = WordAdapter{
@@ -62,6 +68,19 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
 //            wordList = list
 //            Log.d("TEST","よびました")
         }
+
+        vm.inited.observe(viewLifecycleOwner){
+            Toast.makeText(context,"正当数を初期化しました。", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_wordConfirmDialogFragment_to_wordListFragment)
+        }
+
+        vm.deleted.observe(viewLifecycleOwner) {
+            //　単語をすべて削除する処理
+            Toast.makeText(context,"単語をすべて削除しました。",Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack(R.id.mainFragment,false)
+        }
+
+
         // リストの区切り線を表示
         val itemDecoration = DividerItemDecoration(context,DividerItemDecoration.VERTICAL)
         binding.recyclerviewWordList.addItemDecoration(itemDecoration)
@@ -77,9 +96,17 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_study_data_delete -> {
+            R.id.correctCnt_all_init -> {
+                // 正当数を初期化する
                 findNavController().navigate(
                     R.id.action_wordListFragment_to_wordConfirmDialogFragment
+                )
+                true
+            }
+            R.id.data_all_delete -> {
+                // 全データ削除する
+                findNavController().navigate(
+                    R.id.action_wordListFragment_to_wordConfirmDeleteDialogFragment
                 )
                 true
             }

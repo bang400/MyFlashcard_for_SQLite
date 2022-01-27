@@ -47,7 +47,12 @@ class MainFragment:Fragment(R.layout.main_fragment) {
         }
 
         binding.buttonLessonMain.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_wordLessonFragment)
+            // レッスン画面へ遷移する
+            if (count != 0){
+                findNavController().navigate(R.id.action_mainFragment_to_wordLessonFragment)
+            }else{
+                Toast.makeText(context,"単語を追加してください",Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

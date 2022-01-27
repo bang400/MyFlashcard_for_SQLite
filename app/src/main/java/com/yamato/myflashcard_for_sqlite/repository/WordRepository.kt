@@ -18,6 +18,12 @@ interface WordRepository {
     // 正当数を初期化する
     suspend fun updateInitCorrectNum(word: Word) :Word
 
+    // 全件の正当数を初期化
+    suspend fun initCorrectNum(): Int
+
+    // 全件のデータを削除
+    suspend fun deleteAll()
+
     //全件取得のメソッド
     fun getAll(): Flow<List<Word>>
 
@@ -29,7 +35,4 @@ interface WordRepository {
 
     // 復習対象のレコードの行数を取得する
     fun getReviewCount(): Flow<Int>
-
-    // 全件の正当数を初期化
-    fun initCorrectNum():Int
 }

@@ -1,6 +1,7 @@
 package com.yamato.myflashcard_for_sqlite.page.list
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -17,18 +18,31 @@ class WordListViewModel @Inject constructor(
     // レポジトリを受け取る
     private val repo: WordRepository
 ):ViewModel() {
+
     // LiveDataをプロパティとしてもたせる
     val wordList = repo.getAll().asLiveData()
     val erroMessage = MutableLiveData<String>()
-    val inited = MutableLiveData<String>()
+    val deleted = MutableLiveData<Boolean>()
+    val inited = MutableLiveData<Boolean>()
 
     fun initCorrectNumFun() {
         viewModelScope.launch {
             try {
                 Log.d("WordListViewModel","before repo")
-                val initedCorrectNum = repo.initCorrectNum()
-                inited.value = initedCorrectNum.toString()
-                Log.d("WordListViewModel","${inited.value}")
+                repo.initCorrectNum()
+                inited.value = true
+            }catch (e: Exception){
+                erroMessage.value = e.message
+            }
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch {
+            try {
+                Log.d("WordListViewModel","before repo")
+                repo.deleteAll()
+                deleted.value = true
             }catch (e: Exception){
                 erroMessage.value = e.message
             }
