@@ -102,6 +102,8 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
              Log.d(TAG,"countList " + Companion.countList)
             for (list in wordList){
                 if (list.id == sortList[countList]) {
+                    // 問題数の表示
+                    binding.textViewQuestionCntLessonDetail.text = "${Companion.countList + 1} / ${Companion.sortList.size}"
                     //　ランダムの並び順と一致しているデータを返す
                     // 単語の表示
                     binding.textViewWordLessonDetail.text = list.word

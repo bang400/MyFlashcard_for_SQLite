@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.yamato.myflashcard_for_sqlite.R
 import com.yamato.myflashcard_for_sqlite.databinding.WordLessonReviewFragmentBinding
 import com.yamato.myflashcard_for_sqlite.model.Word
+import com.yamato.myflashcard_for_sqlite.page.lessonDetail.WordLessonDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,8 @@ class WordLessonReviewFragment:Fragment(R.layout.word_lesson_review_fragment) {
         lateinit var wordList: List<Word>
         var countList = 0
         var judge = false
+        var firstListSize = 0
+        var questionCnt = 0
         var TAG = "WordLessonReviewFragment"
     }
 
@@ -30,8 +33,11 @@ class WordLessonReviewFragment:Fragment(R.layout.word_lesson_review_fragment) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordLessonReviewFragmentBinding.bind(view)
         (activity as AppCompatActivity).supportActionBar?.title = "復習"
-
+        // リスト用の添え字
         countList = 0
+        // 今何問か
+        questionCnt = 1
+        var firstFlg = true
 
         // 解説の表示設定：初期値 オフ
         binding.textViewCommentaryLessonReview.visibility = View.INVISIBLE
@@ -53,7 +59,18 @@ class WordLessonReviewFragment:Fragment(R.layout.word_lesson_review_fragment) {
             binding.buttonCommentaryLessonReview.visibility = View.VISIBLE
             //　解説を非表示にする
             binding.textViewCommentaryLessonReview.visibility = View.INVISIBLE
-            countList = 0
+            // 今何問か
+            questionCnt = questionCnt + 1
+
+            Log.d(TAG,"countListわかる: $countList")
+            Log.d(TAG,"wordListわかる: $wordList")
+
+            // 問題の最後のとき
+            if(countList + 1 == wordList.size){
+                // 問題終了
+                Toast.makeText(context,"問題終了", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
         }
         // わからないボタンを押下したときの処理
         binding.buttonUnknownLessonReview.setOnClickListener{
@@ -64,19 +81,35 @@ class WordLessonReviewFragment:Fragment(R.layout.word_lesson_review_fragment) {
             binding.buttonCommentaryLessonReview.visibility = View.VISIBLE
             //　解説を非表示にする
             binding.textViewCommentaryLessonReview.visibility = View.INVISIBLE
-            if(wordList.size > 1){
-                countList = countList + 1
-            }else{
-                countList = 0
+            // 今何問か
+            questionCnt = questionCnt + 1
+
+            Log.d(TAG,"countListわからない: $countList")
+            Log.d(TAG,"wordListわからない: $wordList")
+
+            // リストの最後の問題とき
+            if(countList + 1 == wordList.size){
                 // 問題終了
                 Toast.makeText(context,"問題終了", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
+            }
+
+            //　問題数が２問以上あるとき
+            if(wordList.size > 1){
+                countList = countList + 1
+            }else{
+
             }
         }
 
         vm.wordList.observe(viewLifecycleOwner) { list ->
             // DBが更新されるたびに呼ばれる
             wordList = list
+
+            if(firstFlg){
+                firstListSize = wordList.size
+                firstFlg = false
+            }
             Log.d(TAG, "wordList: $wordList")
             fetchLesson(wordList,countList)
         }
@@ -84,16 +117,13 @@ class WordLessonReviewFragment:Fragment(R.layout.word_lesson_review_fragment) {
 
     // ランダム出力時の問題表示
     private fun fetchLesson(wordList: List<Word>, countList: Int) {
-        Log.d(TAG,"wordList.size: " + wordList.size)
         if (wordList.size > countList) {
+            // 問題数の表示
+            binding.textViewQuestionCntLessonReview.text = "${questionCnt} / ${firstListSize}"
             // 単語の表示
             binding.textViewWordLessonReview.text = wordList[countList].word
             // 解説の表示
             binding.textViewCommentaryLessonReview.text = wordList[countList].commentary
-        }else{
-            // 問題終了
-            Toast.makeText(context,"問題終了", Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack()
         }
     }
 
