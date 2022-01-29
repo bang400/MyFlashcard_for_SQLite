@@ -74,4 +74,6 @@ dependencies {
     // setFragmentResultを使用できる
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
+    // admobの設定
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
 }
