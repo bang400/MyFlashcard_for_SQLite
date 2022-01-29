@@ -2,6 +2,7 @@ package com.yamato.myflashcard_for_sqlite.page.lessonDetail
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ListAdapter
 import android.widget.Toast
@@ -34,6 +35,11 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordLessonDetailFragmentBinding.bind(view)
+
+        // ツールバーの設定
+        setHasOptionsMenu(true)
+        // ツールバーに戻るボタンを設置
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.title = "ランダム出題"
 
         countList = 0
@@ -90,6 +96,16 @@ class WordLessonDetailFragment: Fragment(R.layout.word_lesson_detail_fragment){
                 firstPerformance = false
             }
 
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().popBackStack()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

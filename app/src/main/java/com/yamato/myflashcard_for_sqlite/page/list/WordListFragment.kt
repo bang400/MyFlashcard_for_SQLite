@@ -28,10 +28,16 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
         var TAG = "WordLessonListFragment"
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        this._binding = WordListFragmentBinding.bind(view)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        // ツールバーの設定
         setHasOptionsMenu(true)
+        //タイトルバーの設定
+        (activity as AppCompatActivity).supportActionBar?.title = "単語リスト"
+        // ツールバーに戻るボタンを設置
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // 正当数を初期化する
         setFragmentResultListener("confirmCorrectNumCnt"){_,data ->
@@ -48,13 +54,6 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
                 vm.deleteAll()
             }
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        this._binding = WordListFragmentBinding.bind(view)
-        //タイトルバーの設定
-        (activity as AppCompatActivity).supportActionBar?.title = "単語リスト"
 
         val adapter = WordAdapter{
             // リストがタップされた時の処理
@@ -96,6 +95,10 @@ class WordListFragment:Fragment(R.layout.word_list_fragment) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().popBackStack()
+                true
+            }
             R.id.correctCnt_all_init -> {
                 // 正当数を初期化する
                 findNavController().navigate(

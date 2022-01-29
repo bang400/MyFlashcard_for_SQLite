@@ -25,6 +25,8 @@ class MainFragment:Fragment(R.layout.main_fragment) {
         //隠したい
 //        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
         (activity as AppCompatActivity).supportActionBar?.title = "ホーム"
+        // ツールバー戻るボタンを非表示にする
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         var count = 0
 

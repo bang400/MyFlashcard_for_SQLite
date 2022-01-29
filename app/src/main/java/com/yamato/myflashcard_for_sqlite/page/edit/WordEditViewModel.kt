@@ -18,14 +18,18 @@ class WordEditViewModel @Inject constructor(
     val notUpdated = MutableLiveData<Boolean>()
 
     fun updateitem(words: Word, word: String, commentary: String) {
+        // 単語入力欄の空白チェック
         if (word.trim().isEmpty()){
             errorMessage.value = "単語入力欄に何か入力してください。"
             return
         }
+        // 解説入力欄の空白チェック
         if (commentary.trim().isEmpty()){
             errorMessage.value = "解説入力欄に何か入力してください。"
             return
         }
+
+        // 入力欄の情報が更新されなかったとき
         if (word == words.word && commentary == words.commentary){
             notUpdated.value = true
             return
@@ -33,7 +37,13 @@ class WordEditViewModel @Inject constructor(
             // 編集された場合のみ、updateする
         viewModelScope.launch {
             try {
-                updateData.value = repo.update(words,word,commentary,0,0)
+                if (word == words.word && commentary != words.commentary) {
+                    // 解説だけが編集されたときは、正当数を初期化しない
+                    updateData.value = repo.update(words, word, commentary, words.correct, words.wrong)
+                }else{
+                    // 単語が編集されたとき　もしくは、単語と解説が編集されたとき正当数も初期化する
+                    updateData.value = repo.update(words, word, commentary, 0, 0)
+                }
             }catch (e:Exception){
                 errorMessage.value = e.message
             }

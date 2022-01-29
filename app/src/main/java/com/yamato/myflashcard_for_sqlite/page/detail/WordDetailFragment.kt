@@ -31,10 +31,16 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
     private val binding: WordDetailFragmentBinding get() = _binding!!
     private val args: WordDetailFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        this._binding = WordDetailFragmentBinding.bind(view)
+
         // メニューを画面に表示させる
         setHasOptionsMenu(true)
+        // タイトルバー設定
+        (activity as AppCompatActivity).supportActionBar?.title = "単語詳細"
+        // ツールバーに戻るボタンを設置
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setFragmentResultListener("edit") { _,data ->
             val words = data.getParcelable("word") as? Word ?: return@setFragmentResultListener
@@ -53,14 +59,6 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
         if (savedInstanceState == null) {
             vm.words.value = args.words
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        this._binding = WordDetailFragmentBinding.bind(view)
-
-        // タイトルバー設定
-        (activity as AppCompatActivity).supportActionBar?.title = "単語詳細"
 
         // リストのアイテムから受け取った単語の表示
         val words = args.words
@@ -103,6 +101,10 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().popBackStack()
+                true
+            }
             R.id.item_edit -> {
                 Log.d("TEST","編集ボタンおされた")
                 //　単語１件の編集ボタン

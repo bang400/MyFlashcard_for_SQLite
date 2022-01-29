@@ -1,6 +1,7 @@
 package com.yamato.myflashcard_for_sqlite.page.lesson
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,11 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordLessonFragmentBinding.bind(view)
+
+        // ツールバーの設定
+        setHasOptionsMenu(true)
+        // ツールバーに戻るボタンを設置
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.title = "レッスンを選択"
 
         var reviewCount = 0
@@ -51,6 +57,16 @@ class WordLessonFragment:Fragment(R.layout.word_lesson_fragment) {
             }else{
                 Toast.makeText(context,"復習対象の単語はありません",Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().popBackStack()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
