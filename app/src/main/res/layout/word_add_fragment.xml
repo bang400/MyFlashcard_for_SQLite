@@ -20,7 +20,7 @@
             android:id="@+id/edittext_word_add_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="単語：半角10文字以内、全角20文字以内"
+            android:hint="単語：20文字以内"
             android:maxLength="20"
             android:maxLines="2" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -40,9 +40,9 @@
             android:id="@+id/edittext_detail_add_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="解説：50文字以内"
             android:maxLength="50"
-            android:maxLines="10"
-            android:hint="解説：半角25文字、全角50文字以内" />
+            android:maxLines="10" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

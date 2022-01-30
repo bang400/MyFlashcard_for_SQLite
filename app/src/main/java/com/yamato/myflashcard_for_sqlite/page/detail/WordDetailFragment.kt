@@ -31,6 +31,10 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
     private val binding: WordDetailFragmentBinding get() = _binding!!
     private val args: WordDetailFragmentArgs by navArgs()
 
+    companion object{
+        var allcnt = 0
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this._binding = WordDetailFragmentBinding.bind(view)
@@ -87,10 +91,20 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
             // リストへ遷移させる
             findNavController().popBackStack()
         }
+
         vm.deleted.observe(viewLifecycleOwner){
             // 削除が完了したときの処理
             Toast.makeText(context,"${words.word}を削除しました。",Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack(R.id.wordListFragment,false)
+            if (allcnt > 1) {
+                // 単語リストに単語がまだある場合、リストに戻る
+                findNavController().popBackStack(R.id.wordListFragment,false)
+            }else{
+                // 単語リストに単語がない場合、メイン画面に戻る
+                findNavController().popBackStack(R.id.mainFragment,false)
+            }
+        }
+        vm.allCnt.observe(viewLifecycleOwner){
+            allcnt = it
         }
     }
 
@@ -116,6 +130,7 @@ class WordDetailFragment:Fragment(R.layout.word_detail_fragment), View.OnClickLi
             R.id.item_delete -> {
                 Log.d("TEST","削除ボタンおされた")
                 // 単語１件の削除ボタン
+                // detatil to Dialog
                 findNavController().navigate(
                     R.id.action_wordDetailFragment_to_wordConfirmItemDialogFragment
                 )
