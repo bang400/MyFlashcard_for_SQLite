@@ -30,17 +30,24 @@ class WordAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val word = getItem(position)
-        holder.bindTo(word)
+        holder.bindTo(word,position)
     }
 
     class ViewHolder(
         private val binding: WordItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
         // 設定メソッド
-        fun bindTo(word: Word) {
-            binding.textViewWordWordList.text = word.word
-            binding.textviewWordNumWordList.text = "No." + word.id.toString()
-            Log.d("WordAdapter",word.word)
+        fun bindTo(word: Word,position: Int) {
+            var itemId = position + 1
+            // 単語ID
+            binding.textviewWordNumWordItem.text = "No.$itemId"
+            // 単語
+            binding.textViewWordWordItem.text = word.word
+            // 正解数
+            binding.textViewCorrectWordItem.text = word.correct.toString()
+            // 誤答数
+            binding.textViewWrongWordItem.text = word.wrong.toString()
+//            Log.d("WordAdapter",word.word)
         }
     }
 
@@ -55,7 +62,9 @@ class WordAdapter(
             //同じアイテムの時に表示内容が同じかどうか
             override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
                 return oldItem.word == newItem.word &&
-                        oldItem.created == newItem.created
+                        oldItem.created == newItem.created &&
+                        oldItem.correct == newItem.correct &&
+                        oldItem.wrong == newItem.wrong
             }
         }
     }

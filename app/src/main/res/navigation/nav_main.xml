@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
     app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.yamato.myflashcard_for_sqlite.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment"
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_wordAddFragment"
             app:destination="@id/wordAddFragment"
@@ -22,14 +24,24 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_mainFragment_to_wordLessonFragment"
+            app:destination="@id/wordLessonFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/wordAddFragment"
         android:name="com.yamato.myflashcard_for_sqlite.page.create.WordAddFragment"
-        android:label="WordAddFragment" >
+        android:label="WordAddFragment"
+        tools:layout="@layout/word_add_fragment">
         <action
             android:id="@+id/action_wordAddFragment_to_wordListFragment"
             app:destination="@id/wordListFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="false"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -38,21 +50,102 @@
     <fragment
         android:id="@+id/wordListFragment"
         android:name="com.yamato.myflashcard_for_sqlite.page.list.WordListFragment"
-        android:label="WordListFragment" >
+        android:label="WordListFragment"
+        tools:layout="@layout/word_list_fragment">
         <action
             android:id="@+id/action_wordListFragment_to_wordDetailFragment"
             app:destination="@id/wordDetailFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_wordListFragment_to_wordConfirmDialogFragment"
+            app:destination="@id/wordConfirmDialogFragment" />
+        <action
+            android:id="@+id/action_wordListFragment_to_wordConfirmDeleteDialogFragment"
+            app:destination="@id/wordConfirmDeleteDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/wordDetailFragment"
         android:name="com.yamato.myflashcard_for_sqlite.page.detail.WordDetailFragment"
-        android:label="WordDetailFragment" >
+        android:label="WordDetailFragment"
+        tools:layout="@layout/word_detail_fragment">
         <argument
             android:name="words"
             app:argType="com.yamato.myflashcard_for_sqlite.model.Word" />
+        <action
+            android:id="@+id/action_wordDetailFragment_to_wordConfirmItemDialogFragment"
+            app:destination="@id/wordConfirmItemDialogFragment" />
+        <action
+            android:id="@+id/action_wordDetailFragment_to_wordEditFragment"
+            app:destination="@id/wordEditFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            />
     </fragment>
+    <fragment
+        android:id="@+id/wordLessonFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.page.lesson.WordLessonFragment"
+        android:label="WordLessonFragment"
+        tools:layout="@layout/word_lesson_fragment">
+        <action
+            android:id="@+id/action_wordLessonFragment_to_wordLessonDetailFragment"
+            app:destination="@id/wordLessonDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_wordLessonFragment_to_wordLessonReviewFragment"
+            app:destination="@id/wordLessonReviewFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/wordLessonDetailFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.page.lessonDetail.WordLessonDetailFragment"
+        android:label="WordLessonDetailFragment"
+        tools:layout="@layout/word_lesson_detail_fragment"/>
+    <fragment
+        android:id="@+id/wordLessonReviewFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.page.lessonReview.WordLessonReviewFragment"
+        android:label="WordLessonReviewFragment"
+        tools:layout="@layout/word_lesson_review_fragment"/>
+    <dialog
+        android:id="@+id/wordConfirmDialogFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmDialogFragment"
+        android:label="WordConfirmDialogFragment" >
+        <action
+            android:id="@+id/action_wordConfirmDialogFragment_to_wordListFragment"
+            app:destination="@id/wordListFragment"
+            app:popUpTo="@id/wordListFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/wordConfirmItemDialogFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmItemDialogFragment"
+        android:label="WordConfirmItemDialogFragment" />
+    <fragment
+        android:id="@+id/wordEditFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.page.edit.WordEditFragment"
+        android:label="WordEditFragment"
+        tools:layout="@layout/word_edit_fragment">
+        <argument
+            android:name="words"
+            app:argType="com.yamato.myflashcard_for_sqlite.model.Word" />
+        <action
+            android:id="@+id/action_wordEditFragment_to_wordDetailFragment"
+            app:destination="@id/wordDetailFragment"
+            app:popUpTo="@id/wordDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/wordConfirmDeleteDialogFragment"
+        android:name="com.yamato.myflashcard_for_sqlite.dialog.WordConfirmDeleteDialogFragment"
+        android:label="WordConfirmDeleteDialogFragment" />
 </navigation>
