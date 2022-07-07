@@ -2,13 +2,13 @@
 Kotlinで英単語帳アプリ for SQLite「Flashcards for me」
 
 # アイコン
-<img src="https://user-images.githubusercontent.com/58414435/177770102-1bd8b86c-9e76-4477-83bc-41ed0323b8ba.png" height="50%" width="50%"/>
+<img src="https://user-images.githubusercontent.com/58414435/177770106-68bb13e6-2c40-4002-a3c1-c0d3273ac659.png" height="10%" width="10%">
 
 # GooglePlayStore背景画像
-<img src="https://user-images.githubusercontent.com/58414435/177770106-68bb13e6-2c40-4002-a3c1-c0d3273ac659.png" height="50%" width="50%">
+<img src="https://user-images.githubusercontent.com/58414435/177770102-1bd8b86c-9e76-4477-83bc-41ed0323b8ba.png" height="20%" width="50%"/>
 
 # スクショ１
-<img src="https://user-images.githubusercontent.com/58414435/177770117-115e6880-8e51-4dee-94b2-978b4f4ec8cc.jpeg" height="50%" width="50%">
+<img src="https://user-images.githubusercontent.com/58414435/177770117-115e6880-8e51-4dee-94b2-978b4f4ec8cc.jpeg" height="20%" width="30%">
 
 # スクショ2
 <img src="https://user-images.githubusercontent.com/58414435/177770123-cab0629f-3c42-4bc8-a858-4fdeffd177af.jpeg" height="50%" width="50%">
