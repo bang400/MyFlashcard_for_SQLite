@@ -1,7 +1,7 @@
 # MyFlashcard_for_SQLite
 Kotlinで英単語帳アプリ for SQLite「Flashcards for me」
 
-<img src="![featureGrafic](https://user-images.githubusercontent.com/58414435/177770102-1bd8b86c-9e76-4477-83bc-41ed0323b8ba.png)" width="320px">
+<img src="![featureGrafic](https://user-images.githubusercontent.com/58414435/177770102-1bd8b86c-9e76-4477-83bc-41ed0323b8ba.png)" width="320px"/>
 
 <img src="![icon](https://user-images.githubusercontent.com/58414435/177770106-68bb13e6-2c40-4002-a3c1-c0d3273ac659.png)" width="50%">
 
