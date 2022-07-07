@@ -11,13 +11,13 @@ Kotlinで英単語帳アプリ for SQLite「Flashcards for me」
 <img src="https://user-images.githubusercontent.com/58414435/177770117-115e6880-8e51-4dee-94b2-978b4f4ec8cc.jpeg" height="20%" width="30%">
 
 # スクショ2
-<img src="https://user-images.githubusercontent.com/58414435/177770123-cab0629f-3c42-4bc8-a858-4fdeffd177af.jpeg" height="50%" width="50%">
+<img src="https://user-images.githubusercontent.com/58414435/177770123-cab0629f-3c42-4bc8-a858-4fdeffd177af.jpeg" height="20%" width="30%">
 
 # スクショ3
-<img src="https://user-images.githubusercontent.com/58414435/177770135-7e155c89-a252-4a22-b16a-56adca1dbcb1.jpeg" height="50%" width="50%">
+<img src="https://user-images.githubusercontent.com/58414435/177770135-7e155c89-a252-4a22-b16a-56adca1dbcb1.jpeg" height="20%" width="30%">
 
 # スクショ4
-<img src="https://user-images.githubusercontent.com/58414435/177770265-2798c997-14c7-491c-bf7b-3f1df6677550.jpeg" height="50%" width="50%">
+<img src="https://user-images.githubusercontent.com/58414435/177770265-2798c997-14c7-491c-bf7b-3f1df6677550.jpeg" height="20%" width="30%">
 
 # スクショ5
-<img src="https://user-images.githubusercontent.com/58414435/177770268-1f92f29b-799e-47f2-af2d-b3c5559bfe91.jpeg" height="50%" width="50%">
+<img src="https://user-images.githubusercontent.com/58414435/177770268-1f92f29b-799e-47f2-af2d-b3c5559bfe91.jpeg" height="20%" width="30%">
