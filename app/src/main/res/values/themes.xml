@@ -3,7 +3,9 @@
     <!--  標準カラー  -->
     <style name="Theme.MyFlashcard_for_SQLite" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
+        <!--   アプリバーとか、ボタンとか     -->
         <item name="colorPrimary">@color/black</item>
+        <!-- ステータスバーとか -->
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
