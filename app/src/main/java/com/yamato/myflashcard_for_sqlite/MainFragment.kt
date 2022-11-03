@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment:Fragment(R.layout.main_fragment) {
 
+    // コミットテスト
     private val vm: MainViewModel by viewModels()
     private var _binding: MainFragmentBinding? = null
     private val binding: MainFragmentBinding get() = _binding!!
