@@ -20,7 +20,7 @@ You can summarize various words such as English words and hard-to-remember phras
 </table>
 
 ### 使い方・便利な点(Usage and Convenience)
-<p>Android版ではスプリットビューを使用することを推奨します。<br>
+<p>Android版はスプリットビューを使用することを推奨します。<br>
 片方に別のアプリ、もう片方で本アプリを開くことで例えば英語字幕の動画を見ている時にわからない単語が出てきたらすぐに単語登録することができます。<br>
 登録した単語はレッスンから記憶テストすることで学習に役立てることができます。</p>
 
