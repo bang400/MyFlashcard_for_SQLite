@@ -32,3 +32,8 @@ The registered words can then be tested by memory test from the lesson to help y
 
 ### 今後やること
 <p>・サーバーにデータを保存する</p>
+<p>・デザインを整える</p>
+
+### リリース履歴
+<p>ver1.0.0.0 初回リリース　公開済み</p>
+<p>ver1.0.2.0 Split View、ダークモード対応 未公開</p>
